@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Parent (aggregator + dependency management) POM for SecurePrograming.
-
-  - Packaging "pom" so this file only manages/aggregates modules.
-  - Java 17 toolchain for all modules.
-  - Imports Spring Boot BOM 3.3.x for consistent dependency versions.
-  - Pins versions for artifacts not in the Boot BOM (e.g., MyBatis Boot).
-  - Child modules: server, client.
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Parent coordinates (make module <parent> blocks match these exactly) -->
     <groupId>edu.secureprog</groupId>
     <artifactId>SecurePrograming</artifactId>
     <version>1.0.0-SNAPSHOT</version>
@@ -22,24 +12,19 @@
     <name>SecurePrograming :: Parent</name>
     <description>Parent POM that manages versions and aggregates modules</description>
 
-    <!-- Project-wide properties -->
     <properties>
-        <!-- Java level used by compiler plugins (Boot respects this too) -->
         <java.version>17</java.version>
-
-        <!-- Platform/BOM version -->
         <spring-boot.version>3.3.3</spring-boot.version>
 
-        <!-- Libraries not managed by the Boot BOM (pin them here) -->
+        <!-- Libraries not managed by Boot BOM -->
         <mybatis-spring-boot.version>3.0.4</mybatis-spring-boot.version>
         <mysql.version>8.4.0</mysql.version>
 
-        <!-- Encodings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <!-- Import Spring Boot's dependency BOM (manages most starter/library versions) -->
+    <!-- Import Boot BOM (manages Spring starters/libs versions) -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -50,24 +35,12 @@
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-            </dependency>
-
-
-            <!-- Lock versions that are not covered by the Boot BOM -->
+            <!-- Pin versions not covered by Boot BOM -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.mysql</groupId>
                 <artifactId>mysql-connector-j</artifactId>
@@ -76,11 +49,9 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- Common plugin versions/configs shared by child modules -->
     <build>
         <pluginManagement>
             <plugins>
-                <!-- Ensure Java 17 compilation across modules -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -89,15 +60,11 @@
                         <release>${java.version}</release>
                     </configuration>
                 </plugin>
-
-                <!-- Modern Surefire (JUnit 5 compatible) -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.2.5</version>
                 </plugin>
-
-                <!-- Attach sources if you deploy artifacts (optional) -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
@@ -107,7 +74,6 @@
         </pluginManagement>
     </build>
 
-    <!-- Reactor modules (folder names must match) -->
     <modules>
         <module>server</module>
         <module>client</module>

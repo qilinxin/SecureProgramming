@@ -1,5 +1,5 @@
 -- ============================================
--- SecurePrograming course — database bootstrap
+-- SecureProgramming course — database bootstrap
 -- MySQL 8.0 / Homebrew build compatible
 -- Password policy: classroom-only (uses 1qaz!QAZ)
 -- ============================================
@@ -10,8 +10,8 @@ ALTER USER 'root'@'localhost'
   IDENTIFIED WITH caching_sha2_password BY '1qaz!QAZ';
 
 -- Re-create the course database (idempotent).
-DROP DATABASE IF EXISTS `secure_programing`;
-CREATE DATABASE `secure_programing`
+DROP DATABASE IF EXISTS `secure_programming`;
+CREATE DATABASE `secure_programming`
   DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_0900_ai_ci;
 
@@ -23,12 +23,12 @@ CREATE ROLE `secprog_readwrite`, `secprog_migrate_role`;
 
 -- Application role: CRUD + stored routine execution; no DDL.
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE
-  ON `secure_programing`.* TO `secprog_readwrite`;
+  ON `secure_programming`.* TO `secprog_readwrite`;
 
 -- Migration role: schema changes only; kept separate from app.
 GRANT CREATE, ALTER, DROP, INDEX, CREATE VIEW,
       ALTER ROUTINE, CREATE ROUTINE, TRIGGER
-  ON `secure_programing`.* TO `secprog_migrate_role`;
+  ON `secure_programming`.* TO `secprog_migrate_role`;
 
 -- --------------------------------------------
 -- Users (localhost-only) and role assignment

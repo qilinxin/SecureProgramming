@@ -1,27 +1,59 @@
-<!-- Plain Java module (no Spring Boot). Add deps here if/when needed. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Inherit versions and plugin management from the parent -->
     <parent>
         <groupId>edu.secureprog</groupId>
         <artifactId>SecurePrograming</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath> <!-- points to the parent in the repo root -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>client</artifactId>
     <name>SecurePrograming :: client</name>
     <packaging>jar</packaging>
 
+    <properties>
+        <!-- use the same Boot version as parent property -->
+        <spring-boot.version>3.3.3</spring-boot.version>
+    </properties>
+
     <dependencies>
-        <!-- Keep it minimal; add libraries (e.g., HTTP client) when the client evolves -->
+        <!-- Core Boot (includes @SpringBootApplication, @ConfigurationProperties, etc.) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- If this client needs to call REST or expose endpoints, keep this; otherwise可删 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Optional: metadata generation for @ConfigurationProperties -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Needed to run as a Boot app and to resolve Boot annotations at build time -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
