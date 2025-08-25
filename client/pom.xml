@@ -5,13 +5,13 @@
 
     <parent>
         <groupId>edu.secureprog</groupId>
-        <artifactId>SecurePrograming</artifactId>
+        <artifactId>SecureProgramming</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>client</artifactId>
-    <name>SecurePrograming :: client</name>
+    <name>SecureProgramming :: client</name>
     <packaging>jar</packaging>
 
     <properties>

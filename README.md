@@ -1,5 +1,5 @@
 
-# SecurePrograming — Multi‑Module Project (client / server)
+# SecureProgramming — Multi‑Module Project (client / server)
 
 A **Maven multi‑module** project containing two submodules: `client` and `server`.
 - **client**: a **Spring Boot 3 / Java 17** REST client that sends HTTP requests to a configurable backend (via `RestClient`).
@@ -24,7 +24,7 @@ A **Maven multi‑module** project containing two submodules: `client` and `serv
 ## Project Structure (Updated)
 
 ```text
-SecurePrograming/
+SecureProgramming/
 ├─ .idea/                                   # IDE configs (ignore in VCS)
 ├─ client/                                  # Client submodule (Spring Boot app)
 │  ├─ src/
